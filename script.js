@@ -1,6 +1,6 @@
 /* 운영 전 이 설정값을 실제 정보와 실제 견적 기준으로 수정하세요. */
 const SITE_CONFIG = {
-  phone: "000-0000-0000",
+  phone: "010-3666-8255",
   businessHours: "평일 09:00–18:00",
   serviceArea: "지역정보 입력 필요",
   footerInfo: "대표자·사업자번호·주소 입력 필요"
@@ -11,7 +11,13 @@ const ESTIMATE_RULES = {
   cooling: { name: "냉난방 설비", base: 150, perArea: 8.5 },
   ventilation: { name: "환기 설비", base: 90, perArea: 5.2 },
   duct: { name: "덕트 공사", base: 120, perArea: 6.8 },
-  maintenance: { name: "점검·유지보수", base: 25, perArea: 1.2 }
+  maintenance: { name: "점검·유지보수", base: 25, perArea: 1.2 },
+  leak: { name: "누수 탐지 및 보수 공사", base: 25, perArea: .8 },
+  sewer: { name: "하수도 공사", base: 30, perArea: 1.1 },
+  waterproof: { name: "방수 작업", base: 35, perArea: 2.6 },
+  interior: { name: "인테리어 시공", base: 80, perArea: 18 },
+  toilet: { name: "변기 교체", base: 20, perArea: .15 },
+  faucet: { name: "수전 교체", base: 8, perArea: .08 }
 };
 const FACILITY_FACTOR = { home: 1, store: 1.15, office: 1.1, factory: 1.35 };
 const CONDITION_FACTOR = { new: 1, replace: 1.2, repair: .65 };
@@ -57,8 +63,8 @@ document.querySelector("#estimateForm").addEventListener("submit", event => {
 
   document.querySelector("#resultTitle").textContent = `${rule.name} 예상 범위`;
   document.querySelector("#resultPrice").textContent = `${won(low)} ~ ${won(high)}`;
-  document.querySelector("#resultText").textContent = `${labels[facility]} ${area}평 기준의 참고용 예상금액입니다. 담당자 상담과 현장 확인 후 정확한 견적을 안내해 드립니다.`;
-  latestText = `[서원공조시스템 간편견적]\n공사: ${rule.name}\n장소: ${labels[facility]}\n면적: ${area}평\n예상범위: ${won(low)}~${won(high)}\n※ 현장조사 전 참고용 금액`;
+  document.querySelector("#resultText").textContent = `${labels[facility]} ${area}평 기준으로 계산한 대략적인 정보입니다. 자세한 견적은 현장 확인 후에 가능합니다.`;
+  latestText = `[서원공조시스템 간편견적]\n공사: ${rule.name}\n장소: ${labels[facility]}\n면적: ${area}평\n예상범위: ${won(low)}~${won(high)}\n※ 참조용 대략적인 정보이며 자세한 견적은 현장 확인 후 가능합니다.`;
   document.querySelector("#estimateForm").hidden = true;
   const result = document.querySelector("#estimateResult"); result.hidden = false; result.scrollIntoView({ behavior: "smooth", block: "center" });
 });

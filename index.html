@@ -32,8 +32,8 @@
       <div class="hero-grid" aria-hidden="true"></div>
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">냉난방 · 환기 · 덕트 · 공조설비</p>
-          <h1>현장을 이해하는 기술,<br><span>정확한 공조설비</span></h1>
+          <p class="eyebrow">공조 · 설비 · 누수 · 방수 · 인테리어</p>
+          <h1><span class="headline-line">현장을 이해하는 기술,</span><span class="headline-line accent">정확한 설비 시공</span></h1>
           <p class="lead">주거공간부터 상업시설과 산업현장까지, 현장 조건에 맞춘 설계와 책임 시공을 제공합니다.</p>
           <div class="hero-actions">
             <a class="button primary" href="#quote">1분 무료 간편견적</a>
@@ -57,12 +57,14 @@
 
     <section class="section" id="services">
       <div class="container">
-        <div class="section-head"><p class="eyebrow">OUR SERVICES</p><h2>필요한 공조설비를 한 번에</h2><p>현장 조사부터 설계·시공·유지관리까지 일관된 서비스를 제공합니다.</p></div>
+        <div class="section-head"><p class="eyebrow">OUR SERVICES</p><h2>공조·생활설비 공사를 한 번에</h2><p>현장 조사부터 설계·시공·유지관리까지 일관된 서비스를 제공합니다.</p></div>
         <div class="cards">
           <article class="service-card"><span class="icon">❄</span><h3>냉난방 설비</h3><p>공간의 규모와 용도에 맞는 냉난방 시스템을 선정하고 효율적으로 설치합니다.</p></article>
           <article class="service-card"><span class="icon">↻</span><h3>환기 설비</h3><p>쾌적한 실내 환경을 위한 급기·배기 및 환기 시스템을 구성합니다.</p></article>
           <article class="service-card"><span class="icon">⌁</span><h3>덕트 공사</h3><p>현장 동선과 풍량을 고려하여 덕트를 설계하고 안전하게 시공합니다.</p></article>
           <article class="service-card"><span class="icon">⚙</span><h3>유지보수</h3><p>설비 점검, 세척, 부품 교체와 장애 대응으로 안정적인 운전을 돕습니다.</p></article>
+          <article class="service-card"><span class="icon">⌕</span><h3>누수·하수도·방수</h3><p>누수 탐지와 보수, 하수도 공사, 방수 작업을 현장 상황에 맞춰 진행합니다.</p></article>
+          <article class="service-card"><span class="icon">▣</span><h3>생활설비·인테리어</h3><p>변기·수전 교체부터 부분 인테리어 시공까지 작은 공사도 상담합니다.</p></article>
         </div>
       </div>
     </section>
@@ -95,11 +97,11 @@
         <div class="quote-intro">
           <p class="eyebrow">SMART ESTIMATE</p><h2>1분 무료<br>간편견적</h2>
           <p>몇 가지 현장 정보만 입력하면 예상 공사비 범위를 바로 확인할 수 있습니다.</p>
-          <div class="notice"><strong>안내</strong><p>표시 금액은 상담을 돕기 위한 참고용입니다. 최종 견적은 현장조사 후 확정됩니다.</p></div>
+          <div class="notice"><strong>안내</strong><p>견적은 고객님께서 참조하실 수 있는 대략적인 정보입니다. 자세한 견적은 현장 확인 후에 가능합니다.</p></div>
         </div>
         <form class="quote-form" id="estimateForm">
           <div class="field"><label for="facility">설치 장소</label><select id="facility" required><option value="">선택해 주세요</option><option value="home">아파트·주택</option><option value="store">상가·음식점</option><option value="office">사무실</option><option value="factory">공장·창고</option></select></div>
-          <div class="field"><label for="service">필요한 공사</label><select id="service" required><option value="">선택해 주세요</option><option value="cooling">냉난방 설비</option><option value="ventilation">환기 설비</option><option value="duct">덕트 공사</option><option value="maintenance">점검·유지보수</option></select></div>
+          <div class="field"><label for="service">필요한 공사</label><select id="service" required><option value="">선택해 주세요</option><optgroup label="공조설비"><option value="cooling">냉난방 설비</option><option value="ventilation">환기 설비</option><option value="duct">덕트 공사</option><option value="maintenance">점검·유지보수</option></optgroup><optgroup label="생활설비·보수공사"><option value="leak">누수 탐지 및 보수 공사</option><option value="sewer">하수도 공사</option><option value="waterproof">방수 작업</option><option value="interior">인테리어 시공</option><option value="toilet">변기 교체</option><option value="faucet">수전 교체</option></optgroup></select></div>
           <div class="field"><label for="area">예상 면적</label><div class="input-unit"><input id="area" type="number" min="1" max="3000" placeholder="예: 30" required><span>평</span></div></div>
           <div class="field"><label for="condition">공사 구분</label><select id="condition" required><option value="new">신규 설치</option><option value="replace">기존 설비 교체</option><option value="repair">부분 수리</option></select></div>
           <div class="field full"><label for="memo">추가 요청사항 <span>(선택)</span></label><textarea id="memo" rows="3" placeholder="설치 환경이나 요청사항을 적어주세요."></textarea></div>
@@ -111,7 +113,7 @@
           <p class="eyebrow">예상 견적 결과</p><h3 id="resultTitle">견적 범위</h3>
           <strong class="price" id="resultPrice"></strong><p id="resultText"></p>
           <div class="result-actions"><a class="button primary" id="resultCall" href="#contact">상세 상담하기</a><button class="button secondary dark" id="copyEstimate" type="button">결과 복사</button></div>
-          <small>※ 실제 금액은 장비 규격, 배관 길이, 전기공사, 현장 접근성 등에 따라 달라질 수 있습니다.</small>
+          <small>※ 견적은 고객님께서 참조하실 수 있는 대략적인 정보입니다. 자세한 견적은 현장 확인 후에 가능합니다.</small>
         </div>
       </div>
     </section>
@@ -120,8 +122,8 @@
       <div class="container contact-inner">
         <div><p class="eyebrow">CONTACT</p><h2>현장에 맞는 설비,<br>편하게 상담하세요.</h2><p>운영자가 실제 연락처와 영업시간으로 교체해 주세요.</p></div>
         <div class="contact-card">
-          <dl><div><dt>대표전화</dt><dd><a id="phoneLink" href="tel:000-0000-0000">000-0000-0000</a></dd></div><div><dt>상담시간</dt><dd id="businessHours">평일 09:00–18:00</dd></div><div><dt>서비스 지역</dt><dd id="serviceArea">지역정보 입력 필요</dd></div></dl>
-          <a class="button primary" id="contactCall" href="tel:000-0000-0000">지금 전화하기</a>
+          <dl><div><dt>대표전화</dt><dd><a id="phoneLink" href="tel:010-3666-8255">010-3666-8255</a></dd></div><div><dt>상담시간</dt><dd id="businessHours">평일 09:00–18:00</dd></div><div><dt>서비스 지역</dt><dd id="serviceArea">지역정보 입력 필요</dd></div></dl>
+          <a class="button primary" id="contactCall" href="tel:010-3666-8255">지금 전화하기</a>
         </div>
       </div>
     </section>

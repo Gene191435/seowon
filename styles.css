@@ -3,3 +3,11 @@
 @media(max-width:900px){.nav-toggle{display:block}.nav{display:none;position:absolute;top:76px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:12px 20px 20px;background:#fff;border-bottom:1px solid var(--line)}.nav.open{display:flex}.nav a{padding:13px}.hero{min-height:auto;padding:90px 0}.hero-inner{grid-template-columns:1fr}.hero-visual{height:390px}.cards{grid-template-columns:1fr 1fr}.work-grid{grid-template-columns:1fr 1fr}.work:first-child{grid-column:1/-1}.quote-layout{grid-template-columns:1fr;gap:35px}.quote-intro{position:static}.estimate-result{grid-column:1}.contact-inner{grid-template-columns:1fr;gap:30px}}
 @media(max-width:600px){.container{width:min(100% - 28px,1160px)}.section{padding:76px 0}.hero h1{letter-spacing:-2px}.hero-visual{height:320px}.machine{transform:scale(.78)}.air-ring{transform:scale(.78)}.status-card{right:0;bottom:28px}.cards,.steps,.work-grid{grid-template-columns:1fr}.steps li,.steps li:last-child{border:0;border-top:1px solid #cfdcdf}.work:first-child{grid-column:auto}.work{min-height:300px}.quote-form{grid-template-columns:1fr;padding:24px}.field,.full{grid-column:1}.contact-card{padding:24px}.contact-card dl div{display:block}.contact-card dd{text-align:left;margin-top:4px}.footer-inner{display:block}.footer-inner>div:last-child{text-align:left;margin-top:20px}.trust-list{gap:12px;flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.fan{animation:none}.button,.service-card{transition:none}}
+
+/* v2: expanded facility services and fixed two-line hero heading */
+.hero h1{font-size:clamp(38px,4.5vw,64px)}
+.hero h1 .headline-line{display:block;white-space:nowrap;color:#fff}
+.hero h1 .headline-line.accent{color:#74dcea}
+.cards{grid-template-columns:repeat(3,1fr)}
+@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.hero h1{font-size:clamp(30px,9.2vw,44px)}.cards{grid-template-columns:1fr}}
