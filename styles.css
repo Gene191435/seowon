@@ -11,3 +11,30 @@
 .cards{grid-template-columns:repeat(3,1fr)}
 @media(max-width:900px){.cards{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.hero h1{font-size:clamp(30px,9.2vw,44px)}.cards{grid-template-columns:1fr}}
+
+/* v3: low-temperature storage, air-conditioning and leak detection focus */
+.master-cards{grid-template-columns:repeat(3,1fr)}
+.service-card.featured{position:relative;overflow:hidden;padding:38px 30px}
+.service-card.featured:before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,var(--navy),var(--cyan))}
+.card-kicker{margin:20px 0 -12px!important;color:#078ca5!important;font-size:12px!important;font-weight:800;letter-spacing:.5px}
+.service-card ul{margin:20px 0 0;padding:18px 0 0;list-style:none;border-top:1px solid var(--line)}
+.service-card li{margin:7px 0;color:#43545e;font-size:13px}
+.service-card li:before{content:"✓";margin-right:8px;color:#10a7bd;font-weight:800}
+.price-tags{display:flex;flex-wrap:wrap;gap:7px;margin:20px 0 0}
+.price-tags span{padding:7px 10px;border-radius:999px;background:#e9f7f9;color:#087b91;font-size:11px;font-weight:800}
+.center-action{text-align:center;margin-top:32px}
+.blog-button{background:#03c75a;color:#fff}
+.upload-section{background:#f1f8f9}
+.upload-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px;align-items:start}
+.upload-layout h2{margin:0 0 16px;font-size:clamp(32px,4vw,48px);line-height:1.25;letter-spacing:-2px}
+.upload-layout>div>p{color:var(--muted)}
+.photo-guide{margin:25px 0;padding:22px 24px 22px 42px;border-radius:14px;background:#fff;color:#45565f;box-shadow:var(--shadow)}
+.photo-guide li{margin:8px 0}
+.photo-form{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:36px;border-radius:20px;background:#fff;box-shadow:var(--shadow)}
+.photo-preview{display:grid;gap:6px;margin-top:10px;color:#50707b;font-size:12px}
+.photo-preview span{padding:8px 10px;border-radius:7px;background:#edf7f8}
+.form-status{margin:0;color:#5a6b74;font-size:12px;text-align:center}
+.form-status a{color:#087e94;font-weight:800;text-decoration:underline}
+.photo-form button:disabled{opacity:.65;cursor:wait}
+@media(max-width:900px){.master-cards{grid-template-columns:1fr}.upload-layout{grid-template-columns:1fr;gap:35px}}
+@media(max-width:600px){.photo-form{grid-template-columns:1fr;padding:24px}.photo-form .field,.photo-form .full{grid-column:1}.hero h1 .headline-line{white-space:normal}}
