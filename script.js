@@ -1,7 +1,7 @@
 const SITE_CONFIG={phone:"010-3666-8255",businessHours:"평일 09:00–18:00",footerInfo:"대표자·사업자번호·주소 입력 필요",formEndpoint:""};
 const SERVICE_INFO={
-  cold_chilled:{name:"냉장 저온창고 설치",unit:"㎡",rate:100,guide:"가로·세로·높이, 보관품목, 목표온도, 전기조건과 실외기 위치를 확인해야 합니다."},
-  cold_frozen:{name:"냉동 저온창고 설치",unit:"㎡",rate:120,guide:"가로·세로·높이, 목표 냉동온도, 단열조건, 전기조건과 실외기 위치를 확인해야 합니다."},
+  cold_chilled:{name:"냉장 저온창고 설치",unit:"평",rate:200,installation:180,guide:"가로·세로·높이, 보관품목, 목표온도, 전기조건과 실외기 위치를 확인해야 합니다."},
+  cold_frozen:{name:"냉동 저온창고 설치",unit:"평",rate:200,installation:180,guide:"가로·세로·높이, 목표 냉동온도, 단열조건, 전기조건과 실외기 위치를 확인해야 합니다."},
   coldrepair:{name:"저온창고 점검·수리",unit:"평",guide:"현재 온도, 이상 증상, 장비 모델명과 설치연도를 알려주시면 상담에 도움이 됩니다."},
   aircon:{name:"에어컨 신규·이전 설치",unit:"평",guide:"공간 면적, 제품 종류, 실내기·실외기 위치와 예상 배관거리를 확인해야 합니다."},
   aircare:{name:"에어컨 점검·유지보수",unit:"평",guide:"냉방 불량, 누수, 소음 등 증상과 제품 모델명을 알려주세요."},
@@ -16,7 +16,25 @@ navToggle.addEventListener("click",()=>{const open=nav.classList.toggle("open");
 nav.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{nav.classList.remove("open");navToggle.setAttribute("aria-expanded","false");navToggle.textContent="☰";}));
 const serviceSelect=document.querySelector("#service"),areaField=document.querySelector("#areaField"),areaInput=document.querySelector("#area"),areaUnit=document.querySelector("#areaUnit");
 serviceSelect.addEventListener("change",()=>{const info=SERVICE_INFO[serviceSelect.value];if(!info)return;if(info.fixed){areaField.hidden=true;areaInput.required=false;}else{areaField.hidden=false;areaInput.required=true;areaUnit.textContent=info.unit||"평";}});
-document.querySelector("#estimateForm").addEventListener("submit",event=>{event.preventDefault();const info=SERVICE_INFO[serviceSelect.value];if(!info)return;const area=Number(areaInput.value);let price="현장정보 확인이 필요합니다";if(info.fixed)price=`${info.fixed.toLocaleString("ko-KR")}만원${info.exact?"":"부터"}`;else if(info.rate&&area>0)price=`약 ${(info.rate*area).toLocaleString("ko-KR")}만원부터`;document.querySelector("#resultTitle").textContent=`${info.name} 예상 견적`;document.querySelector("#resultPrice").textContent=price;document.querySelector("#resultText").textContent=`${info.guide} 견적은 고객님께서 참조하실 수 있는 대략적인 정보이며, 부가세는 별도입니다. 자세한 견적은 현장 확인 후 가능합니다.`;document.querySelector("#estimateForm").hidden=true;const result=document.querySelector("#estimateResult");result.hidden=false;result.scrollIntoView({behavior:"smooth",block:"center"});});
+document.querySelector("#estimateForm").addEventListener("submit",event=>{
+  event.preventDefault();const info=SERVICE_INFO[serviceSelect.value];if(!info)return;
+  const area=Number(areaInput.value),breakdown=document.querySelector("#resultBreakdown");
+  let price="현장정보 확인이 필요합니다";breakdown.replaceChildren();breakdown.hidden=true;
+  if(info.fixed)price=`${info.fixed.toLocaleString("ko-KR")}만원${info.exact?"":"부터"}`;
+  else if(info.rate&&area>0){
+    const work=info.rate*area;
+    price=`약 ${(work+(info.installation||0)).toLocaleString("ko-KR")}만원부터`;
+    if(info.installation){
+      const items=[[`저온창고 ${area.toLocaleString("ko-KR")}평 × ${info.rate}만원`,`${work.toLocaleString("ko-KR")}만원부터`],["시공비",`${info.installation.toLocaleString("ko-KR")}만원`]];
+      for(const [label,value] of items){const row=document.createElement("div"),name=document.createElement("span"),amount=document.createElement("strong");name.textContent=label;amount.textContent=value;row.append(name,amount);breakdown.append(row);}
+      breakdown.hidden=false;
+    }
+  }
+  document.querySelector("#resultTitle").textContent=`${info.name} 예상 견적`;
+  document.querySelector("#resultPrice").textContent=price;
+  document.querySelector("#resultText").textContent=`${info.guide} 견적은 고객님께서 참조하실 수 있는 대략적인 정보이며, 부가세는 별도입니다. 자세한 견적은 현장 확인 후 가능합니다.`;
+  document.querySelector("#estimateForm").hidden=true;const result=document.querySelector("#estimateResult");result.hidden=false;result.scrollIntoView({behavior:"smooth",block:"center"});
+});
 document.querySelector("#resultClose").addEventListener("click",()=>{document.querySelector("#estimateResult").hidden=true;document.querySelector("#estimateForm").hidden=false;});
 const photos=document.querySelector("#sitePhotos"),preview=document.querySelector("#photoPreview");
 photos.addEventListener("change",()=>{preview.innerHTML="";const files=[...photos.files];if(files.length>5){photos.value="";preview.textContent="사진은 최대 5장까지 선택할 수 있습니다.";return;}if(files.some(file=>file.size>5*1024*1024)){photos.value="";preview.textContent="장당 5MB 이하의 사진만 올려주세요.";return;}files.forEach(file=>{const item=document.createElement("span");item.textContent=`${file.name} (${(file.size/1024/1024).toFixed(1)}MB)`;preview.appendChild(item);});});
