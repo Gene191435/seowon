@@ -59,3 +59,13 @@
 @media(max-width:900px){.master-cards{grid-template-columns:1fr}.upload-layout{grid-template-columns:1fr;gap:35px}}
 @media(max-width:900px){.case-card,.case-card.reverse{grid-template-columns:1fr}.case-card.reverse .case-copy,.case-card.reverse .case-photos{order:initial}.case-copy{padding:4px}}
 @media(max-width:600px){.photo-form{grid-template-columns:1fr;padding:24px}.photo-form .field,.photo-form .full{grid-column:1}.hero h1 .headline-line{white-space:normal}.case-card{padding:16px;border-radius:18px}.case-photos{grid-template-columns:1fr}.case-photos figure{aspect-ratio:4/3}.case-photos figcaption{padding:42px 14px 13px}}
+
+.kakao-card{padding:38px;border-radius:20px;background:#fff;color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.17)}
+.kakao-card h3{margin:0 0 14px;font-size:clamp(22px,2.8vw,30px);line-height:1.35}
+.kakao-card p{color:var(--muted);margin:0 0 18px}
+.kakao-card ul{margin:0 0 25px;padding-left:23px;color:#45565f}
+.kakao-card li{margin:7px 0}
+.kakao-card small{display:block;margin-top:16px;color:var(--muted)}
+.kakao-card.light{align-self:center}
+.contact-card .button+.button{margin-top:10px}
+@media(max-width:600px){.kakao-card{padding:25px}.kakao-card .button{width:100%;text-align:center}}
