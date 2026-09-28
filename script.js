@@ -14,13 +14,18 @@ function applyConfig(){const href=`tel:${cleanPhone(SITE_CONFIG.phone)}`;documen
 const navToggle=document.querySelector(".nav-toggle"),nav=document.querySelector(".nav");
 navToggle.addEventListener("click",()=>{const open=nav.classList.toggle("open");navToggle.setAttribute("aria-expanded",String(open));navToggle.textContent=open?"×":"☰";});
 nav.querySelectorAll("a").forEach(link=>link.addEventListener("click",()=>{nav.classList.remove("open");navToggle.setAttribute("aria-expanded","false");navToggle.textContent="☰";}));
-const serviceSelect=document.querySelector("#service"),areaField=document.querySelector("#areaField"),areaInput=document.querySelector("#area"),areaUnit=document.querySelector("#areaUnit");
-serviceSelect.addEventListener("change",()=>{const info=SERVICE_INFO[serviceSelect.value];if(!info)return;if(info.fixed){areaField.hidden=true;areaInput.required=false;}else{areaField.hidden=false;areaInput.required=true;areaUnit.textContent=info.unit||"평";}});
+const serviceSelect=document.querySelector("#service"),facilitySelect=document.querySelector("#facility"),areaField=document.querySelector("#areaField"),areaInput=document.querySelector("#area"),areaUnit=document.querySelector("#areaUnit");
+const leakServices=new Set(["leak_pressure","leak_repair","waterproof"]);
+function updateFacilityPriceNote(){const note=document.querySelector("#facilityPriceNote");note.textContent=leakServices.has(serviceSelect.value)&&facilitySelect.value&&facilitySelect.value!=="home"?"상가·공장 등 비주거 현장의 누수·방수는 현장 조건을 확인해 별도 견적을 안내합니다.":"누수 표시금액은 아파트·주택 기준입니다. 상가·공장 등은 별도 견적입니다.";}
+facilitySelect.addEventListener("change",updateFacilityPriceNote);
+serviceSelect.addEventListener("change",()=>{updateFacilityPriceNote();const info=SERVICE_INFO[serviceSelect.value];if(!info)return;if(info.fixed){areaField.hidden=true;areaInput.required=false;}else{areaField.hidden=false;areaInput.required=true;areaUnit.textContent=info.unit||"평";}});
 document.querySelector("#estimateForm").addEventListener("submit",event=>{
   event.preventDefault();const info=SERVICE_INFO[serviceSelect.value];if(!info)return;
   const area=Number(areaInput.value),breakdown=document.querySelector("#resultBreakdown");
+  const separateQuote=leakServices.has(serviceSelect.value)&&facilitySelect.value!=="home";
   let price="현장정보 확인이 필요합니다";breakdown.replaceChildren();breakdown.hidden=true;
-  if(info.fixed)price=`${info.fixed.toLocaleString("ko-KR")}만원${info.exact?"":"부터"}`;
+  if(separateQuote)price="현장 확인 후 별도 견적";
+  else if(info.fixed)price=`${info.fixed.toLocaleString("ko-KR")}만원${info.exact?"":"부터"}`;
   else if(info.rate&&area>0){
     const work=info.rate*area;
     price=`약 ${(work+(info.installation||0)).toLocaleString("ko-KR")}만원부터`;
@@ -32,7 +37,7 @@ document.querySelector("#estimateForm").addEventListener("submit",event=>{
   }
   document.querySelector("#resultTitle").textContent=`${info.name} 예상 견적`;
   document.querySelector("#resultPrice").textContent=price;
-  document.querySelector("#resultText").textContent=`${info.guide} 견적은 고객님께서 참조하실 수 있는 대략적인 정보이며, 부가세는 별도입니다. 자세한 견적은 현장 확인 후 가능합니다.`;
+  document.querySelector("#resultText").textContent=separateQuote?`상가·공장 등 비주거 현장은 배관 규모와 접근성, 검사 범위, 굴착·복구 여부 등을 확인해 검사비와 보수비를 구분하여 안내합니다. ${info.guide}`:`${info.guide} 견적은 고객님께서 참조하실 수 있는 대략적인 정보이며, 부가세는 별도입니다. 자세한 견적은 현장 확인 후 가능합니다.`;
   document.querySelector("#estimateForm").hidden=true;const result=document.querySelector("#estimateResult");result.hidden=false;result.scrollIntoView({behavior:"smooth",block:"center"});
 });
 document.querySelector("#resultClose").addEventListener("click",()=>{document.querySelector("#estimateResult").hidden=true;document.querySelector("#estimateForm").hidden=false;});
