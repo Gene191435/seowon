@@ -71,6 +71,7 @@
 .case-photos img{object-position:center}
 .center-action{margin-top:30px}
 .outline{border-color:#cbdadd;color:#264652;background:#fff}
+.center-action .blog-button{border-color:#03c75a;background:#03c75a;color:#fff}
 .price-section{background:#f2f7f8}
 .price-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
 .price-layout>div:first-child>p:last-child{color:var(--muted);line-height:1.85}
@@ -181,7 +182,6 @@
 .price-breakdown div{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:14px}
 .price-breakdown strong{color:#087b91}
 .center-action{text-align:center;margin-top:32px}
-.blog-button{background:#03c75a;color:#fff}
 .upload-section{background:#f1f8f9}
 .upload-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:70px;align-items:start}
 .upload-layout h2{margin:0 0 16px;font-size:clamp(32px,4vw,48px);line-height:1.25;letter-spacing:-2px}
