@@ -1,0 +1,6 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.owk.co.kr/sitemap.xml
+  
